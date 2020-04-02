@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ApolloProvider } from "@apollo/react-hooks";
+import { ThemeProvider } from "emotion-theming";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+
+import apolloClient from "./apollo/client";
+import ToDo from "./components/containers/Todo";
+import ToDoList from "./components/containers/ToDoList";
+import AddTask from "./components/containers/AddTask";
+import { defaultTheme } from "./theme";
+
+const theme = defaultTheme;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={apolloClient}>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Layout>
+            <Switch>
+              <Route path="/todo/:id">
+                <ToDo />
+              </Route>
+              <Route path="/addtask">
+                <AddTask />
+              </Route>
+              <Route path="/">
+                <ToDoList />
+              </Route>
+            </Switch>
+          </Layout>
+        </Router>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }
 
