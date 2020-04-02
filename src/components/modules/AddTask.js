@@ -1,9 +1,7 @@
 import React from "react";
 
 function AddTask(props) {
-  props.setNewTask(3333333);
-
-  return <div></div>;
+  return <div>add New Task</div>;
 }
 
 export default AddTask;

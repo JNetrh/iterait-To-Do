@@ -1,7 +1,12 @@
 import React from "react";
+import Navigation from "../Navigation";
 
 function Layout(props) {
-  return <div>Hello: {props.children}</div>;
+  return (
+    <div>
+      <Navigation /> {props.children}
+    </div>
+  );
 }
 
 export default Layout;
